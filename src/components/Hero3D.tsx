@@ -5,7 +5,9 @@ import * as THREE from 'three';
 
 // Nube de Partículas (Estilo Hacker)
 const ParticleCloud = () => {
-  const ref = useRef<any>();
+  // CORRECCIÓN 1: Agregado (null)
+  const ref = useRef<any>(null);
+  
   const [positions] = useMemo(() => {
     const positions = new Float32Array(3000 * 3);
     for (let i = 0; i < 3000; i++) {
@@ -20,7 +22,9 @@ const ParticleCloud = () => {
   }, []);
 
   useFrame((state, delta) => {
-    ref.current.rotation.y -= delta / 15;
+    if (ref.current) {
+      ref.current.rotation.y -= delta / 15;
+    }
   });
 
   return (
@@ -34,10 +38,15 @@ const ParticleCloud = () => {
 
 // Núcleo Sólido Wireframe
 const Core = () => {
-  const mesh = useRef<any>();
+  // CORRECCIÓN 2: Agregado (null)
+  const mesh = useRef<any>(null);
+
   useFrame((state) => {
-    mesh.current.rotation.y = state.clock.getElapsedTime() * 0.2;
+    if (mesh.current) {
+      mesh.current.rotation.y = state.clock.getElapsedTime() * 0.2;
+    }
   });
+
   return (
     <Sphere ref={mesh} args={[1.5, 32, 32]}>
       <meshBasicMaterial color="#00F0FF" wireframe transparent opacity={0.15} />
