@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;700&family=Inter:wght@300;400;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* REGLAS MAESTRAS DE TAMAÑO */
+html, body, #root {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-color: #020204; /* Negro Profundo */
+  color: #e2e8f0;
+  overflow-x: hidden; /* Evita scroll horizontal */
+}
+
+/* Tipografías */
+body { font-family: 'Inter', sans-serif; }
+.font-code, .font-heading { font-family: 'Fira Code', monospace !important; }
+
+/* --- FONDO DE ESTRELLAS (Full Screen Fijo) --- */
+.stars-bg {
+  position: fixed; /* Se queda quieto al hacer scroll */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1; /* Se va al fondo */
+  background: radial-gradient(circle at 50% 50%, #0a0a12 0%, #000000 100%);
+}
+
+/* Animación de estrellas fugaces */
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: twinkle 3s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
